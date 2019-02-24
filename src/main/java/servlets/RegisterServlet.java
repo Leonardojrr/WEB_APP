@@ -26,9 +26,9 @@ public class RegisterServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        RegisterHandler newUser = new RegisterHandler();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+            
+            RegisterHandler newUser = new RegisterHandler();
             PrintWriter out = response.getWriter();    
                 
             try {

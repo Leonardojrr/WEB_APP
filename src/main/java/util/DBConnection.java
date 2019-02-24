@@ -17,8 +17,9 @@ import java.sql.Timestamp;
 public class DBConnection {
 		private Timestamp ts;
 	private Connection con;
-	private PreparedStatement pstm;
+	private PreparedStatement pstm,validate_pstm;
 	private ResultSet rs;
+        boolean valid_user;
 	private int res;
         
 	public DBConnection(String driver, String url, String usr, String pwd) {
@@ -33,7 +34,7 @@ public class DBConnection {
   //Select simples para comprobaciones
   public ResultSet execute(String query, Object... values) {
     try {
-      this.pstm = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      this.pstm = this.con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       for (int i = 0; i < values.length; i++) {
         this.pstm.setObject(i + 1, values[i]);
       }
@@ -43,11 +44,25 @@ public class DBConnection {
     }
     return this.rs;
   }
-
+  
+    public boolean validateUser(String query,String userName,String Email) throws SQLException {
+    try {
+      this.validate_pstm = this.con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      
+      this.validate_pstm.setObject(1, userName);
+      this.validate_pstm.setObject(2, Email);
+      
+      this.rs = this.validate_pstm.executeQuery();
+      this.valid_user = this.rs.next();
+    } catch (SQLException e) {
+    }
+    return this.valid_user;
+  }
+    
   //Sentencias de modificaciones a la DB
   public int update(String query, Object... values) {
     try {
-      this.pstm = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      this.pstm = this.con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
       for (int i = 0; i < values.length; i++) {
         this.pstm.setObject(i + 1, values[i]);
@@ -67,7 +82,7 @@ public class DBConnection {
 	//Cerrar conexiones
 	public void closeCon() {
 		try {
-			this.con.close();
+                    this.con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
