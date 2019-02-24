@@ -32,7 +32,7 @@ public class RegisterHandler {
                 resp = "Ok";
                 }
                 else{
-                resp = "OK"; 
+                resp = "Error"; 
                 }
       db.closeCon();
     } catch (Exception e) {

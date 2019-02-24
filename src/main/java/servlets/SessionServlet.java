@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -47,9 +48,11 @@ public class SessionServlet extends HttpServlet {
           break;
         case "Error":
           out.print(401);
+          response.setStatus(401);
           break;
         default:
           out.print(500);
+          response.setStatus(500);
           break;
       }
     } catch (SQLException ex) {

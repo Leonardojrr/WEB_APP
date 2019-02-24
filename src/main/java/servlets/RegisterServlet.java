@@ -19,28 +19,39 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
 public class RegisterServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-       @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+
+  private static final long serialVersionUID = 1L;
+
+  @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+          throws ServletException, IOException {
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    RegisterHandler newUser = new RegisterHandler();
+    PrintWriter out = response.getWriter();
+
+    try {
+      String status = newUser.insertUser(request);
+      switch (status) {
+        case "Ok":
+          out.print(200);
+          response.setStatus(200);
+          break;
+        case "Error":
+          out.print(409);
+          response.setStatus(409);
+          break;
+        default:
+          out.print(500);
+          response.setStatus(500);
+          break;
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-            
-            RegisterHandler newUser = new RegisterHandler();
-            PrintWriter out = response.getWriter();    
-                
-            try {
-                String status = newUser.insertUser(request);
-                if("Ok".equals(status)){
-                        out.print(200);
-                }else{
-                        out.print(500);
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                    
-    }
+  }
 }
