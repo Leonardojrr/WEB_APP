@@ -24,10 +24,16 @@ public class RegisterHandler {
     System.out.print("Response:" + resp);
     try {
       UserModel user = jackson.jsonToPlainObj(request, UserModel.class);
-      db.update(prpReader.getValue("registerUser"), user.getUsername(),
-              Encrypter.getMD5(user.getPassword()), user.getName(), user.getLastName(), user.getEmail(), user.getBirthday(), db.currentTimestamp(),
-              user.isSex());
-      resp = "Ok";
+      boolean isValid = !db.validateUser(prpReader.getValue("checkUser"), user.getUsername(),user.getEmail());
+                if(isValid){
+                db.update(prpReader.getValue("registerUser"),user.getUsername(),
+                Encrypter.getMD5(user.getPassword()),user.getName(),user.getLastName(),user.getEmail(),user.getBirthday(),db.currentTimestamp(),
+                user.isSex());
+                resp = "Ok";
+                }
+                else{
+                resp = "OK"; 
+                }
       db.closeCon();
     } catch (Exception e) {
       e.printStackTrace();
