@@ -5,7 +5,7 @@
  */
 package servlets;
 
-import handler.RegisterHandler;
+import handlers.RegisterHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;

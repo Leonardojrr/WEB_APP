@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>SessionFilter</filter-name>
+        <filter-class>filters.SessionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SessionFilter</filter-name>
+        <servlet-name>SessionServlet</servlet-name>
+    </filter-mapping>
     <servlet>
         <servlet-name>SessionServlet</servlet-name>
         <servlet-class>servlets.SessionServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SessionInfoServlet</servlet-name>
+        <servlet-class>servlets.SessionInfoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogOutServlet</servlet-name>
+        <servlet-class>servlets.LogOutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SessionServlet</servlet-name>
         <url-pattern>/SessionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SessionInfoServlet</servlet-name>
+        <url-pattern>/SessionInfoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogOutServlet</servlet-name>
+        <url-pattern>/LogOutServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
