@@ -44,12 +44,16 @@ public class SessionHandler {
        HttpSession session = request.getSession();
        session.setAttribute("user", objM.writeValueAsString(userSession));
        MessageModel msgToUser = new MessageModel();
-       msgToUser.setMsg(200, "login Successful");
+       //msgToUser.setMsg(200, "login Successful");
+       msgToUser.setStatus(200);
+       msgToUser.setMessage("login Successful");
        resp = objM.writeValueAsString(msgToUser);
       } 
       else {
           MessageModel msgToUser = new MessageModel();
-          msgToUser.setMsg(401, "Not Logged In");
+          //msgToUser.setMsg(401, "Not Logged In");
+          msgToUser.setStatus(401);
+          msgToUser.setMessage("Not Logged In");
           resp = objM.writeValueAsString(msgToUser);
       }
       db.closeCon();

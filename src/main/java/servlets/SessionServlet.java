@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import Models.MessageModel;
 import handlers.SessionHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,23 +39,11 @@ public class SessionServlet extends HttpServlet {
     SessionHandler loginUser = new SessionHandler();
     PrintWriter out = response.getWriter();
 
-    try {
-      String status = loginUser.loginUser(request);
-      switch (status) {
-        case "Ok":
-          out.print(200);
-          response.setStatus(200);
-          break;
-        case "Error":
-          out.print(401);
-          response.setStatus(401);
-          break;
-        default:
-          out.print(500);
-          response.setStatus(500);
-          break;
-      }
-    } catch (SQLException ex) {
+        try{
+            response.setContentType("application/json");
+            String json = loginUser.loginUser(request);
+            out.write(json);
+        } catch (SQLException ex) {
       Logger.getLogger(SessionServlet.class.getName()).log(Level.SEVERE, null, ex);
     }
 

@@ -34,7 +34,7 @@ public class SessionFilter implements Filter {
       }
       else{
           MessageModel msgToUser = new MessageModel();
-          msgToUser.setMsg(403, "Already logged in");
+          //msgToUser.setMsg(403, "Already logged in");
           json = objM.writeValueAsString(msgToUser);
           out.print(json);
       }

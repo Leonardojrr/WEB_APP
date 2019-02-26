@@ -19,7 +19,9 @@ public class LogOutServlet extends HttpServlet {
         ObjectMapper objM = new ObjectMapper();
         request.getSession().invalidate();
         MessageModel msgToUser = new MessageModel();
-        msgToUser.setMsg(200, "Session finished");
+        //msgToUser.setMsg(200, "Session finished");
+          msgToUser.setStatus(200);
+          msgToUser.setMessage("Session finished");        
         String json = objM.writeValueAsString(msgToUser);
         response.getWriter().print(json);
     } 

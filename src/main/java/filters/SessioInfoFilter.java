@@ -34,7 +34,9 @@ public class SessioInfoFilter implements Filter {
       }
       else{
           MessageModel msgToUser = new MessageModel();
-          msgToUser.setMsg(401, "Not Logged In");
+          //msgToUser.setMsg(401, "Not Logged In");
+          msgToUser.setStatus(401);
+          msgToUser.setMessage("Not Logged In");          
           json = objM.writeValueAsString(msgToUser);
           out.print(json);
       }

@@ -15,10 +15,10 @@ fetch("http://localhost:8080/SocialForge/session", params)
 .then(resp => resp.json())
 .then(data => {
     console.log(data);
-  if (data==200){
+  if (data.status==200){
       location.href = "http://localhost:8080/SocialForge/views/dashboard.html";
   }else{
-      alert("Error al iniciar sesion, status:"+data);
+      alert("Error al iniciar sesion, status:"+data.status);
   }
 });
 }
