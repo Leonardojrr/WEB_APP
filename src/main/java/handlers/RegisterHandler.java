@@ -1,6 +1,8 @@
 package handlers;
 
+import Models.MessageModel;
 import Models.UserModel;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import utils.DBConnection;
@@ -15,11 +17,12 @@ public class RegisterHandler {
   private SuperMapper jackson;
 
   public String insertUser(HttpServletRequest request) throws SQLException {
-
+    ObjectMapper objM = new ObjectMapper();
     prpReader = PropReader.getInstance();
     db = new DBConnection(prpReader.getValue("dbDriver"), prpReader.getValue("dbUrl"), prpReader.getValue("dbUser"), prpReader.getValue("dbPassword"));
     jackson = new SuperMapper();
     String resp = "";
+     MessageModel msgToUser = new MessageModel();
 
     System.out.print("Response:" + resp);
     try {
@@ -29,10 +32,14 @@ public class RegisterHandler {
                 db.update(prpReader.getValue("registerUser"),user.getUsername(),
                 Encrypter.getMD5(user.getPassword()),user.getName(),user.getLastName(),user.getEmail(),user.getBirthday(),db.currentTimestamp(),
                 user.isSex());
-                resp = "Ok";
+                msgToUser.setStatus(200);
+                msgToUser.setMessage("Registro exitoso");
+                resp = objM.writeValueAsString(msgToUser);
                 }
                 else{
-                resp = "Error"; 
+                msgToUser.setStatus(401);
+                msgToUser.setMessage("Usuario o Email ya registrado");
+                resp = objM.writeValueAsString(msgToUser);
                 }
       db.closeCon();
     } catch (Exception e) {

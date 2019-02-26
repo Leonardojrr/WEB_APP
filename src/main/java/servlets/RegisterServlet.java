@@ -34,21 +34,9 @@ public class RegisterServlet extends HttpServlet {
     PrintWriter out = response.getWriter();
 
     try {
-      String status = newUser.insertUser(request);
-      switch (status) {
-        case "Ok":
-          out.print(200);
-          response.setStatus(200);
-          break;
-        case "Error":
-          out.print(409);
-          response.setStatus(409);
-          break;
-        default:
-          out.print(500);
-          response.setStatus(500);
-          break;
-      }
+      response.setContentType("application/json");
+      String json = newUser.insertUser(request);
+      out.write(json);
     } catch (SQLException ex) {
       Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
     }

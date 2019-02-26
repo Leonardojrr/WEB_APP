@@ -34,8 +34,7 @@ public class SessionServlet extends HttpServlet {
   }
 
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
     SessionHandler loginUser = new SessionHandler();
     PrintWriter out = response.getWriter();
 

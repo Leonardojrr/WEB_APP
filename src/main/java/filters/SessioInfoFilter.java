@@ -25,6 +25,7 @@ public class SessioInfoFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,FilterChain chain)throws IOException, ServletException {
       HttpServletRequest req = (HttpServletRequest) request;
       HttpServletResponse resp = (HttpServletResponse) response;
+      resp.setContentType("application/json");
       String json;
       PrintWriter out = resp.getWriter();
       ObjectMapper objM = new ObjectMapper();
@@ -34,7 +35,6 @@ public class SessioInfoFilter implements Filter {
       }
       else{
           MessageModel msgToUser = new MessageModel();
-          //msgToUser.setMsg(401, "Not Logged In");
           msgToUser.setStatus(401);
           msgToUser.setMessage("Not Logged In");          
           json = objM.writeValueAsString(msgToUser);

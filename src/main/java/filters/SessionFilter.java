@@ -26,6 +26,7 @@ public class SessionFilter implements Filter {
       HttpServletRequest req = (HttpServletRequest) request;
       HttpServletResponse resp = (HttpServletResponse) response;
       String json;
+      resp.setContentType("application/json");
       PrintWriter out = resp.getWriter();
       ObjectMapper objM = new ObjectMapper();
       HttpSession session = req.getSession(false);
@@ -34,7 +35,8 @@ public class SessionFilter implements Filter {
       }
       else{
           MessageModel msgToUser = new MessageModel();
-          //msgToUser.setMsg(403, "Already logged in");
+          msgToUser.setStatus(403);
+          msgToUser.setMessage("Already logged in");
           json = objM.writeValueAsString(msgToUser);
           out.print(json);
       }
