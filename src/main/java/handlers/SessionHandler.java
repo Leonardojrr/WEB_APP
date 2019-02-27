@@ -47,6 +47,7 @@ public class SessionHandler {
        //msgToUser.setMsg(200, "login Successful");
        msgToUser.setStatus(200);
        msgToUser.setMessage("login Successful");
+       msgToUser.setData(user.getUsername());
        resp = objM.writeValueAsString(msgToUser);
       } 
       else {
