@@ -1,9 +1,18 @@
 
 package Models;
 
-public class MessageModel {
+public class MessageModel<T> {
   private String message;
   private Integer status;
+  private T data;
+
+  public T getData() {
+    return data;
+  }
+
+  public void setData(T data) {
+    this.data = data;
+  }
 
 
   public String getMessage() {
