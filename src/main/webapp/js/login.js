@@ -11,14 +11,15 @@ function login() {
         headers: new Headers({'Content-Type': 'application/json'}), 
         body:JSON.stringify(data) 
 }
-fetch("http://localhost:8080/SocialForge/session", params)
+fetch("./../session", params)
 .then(resp => resp.json())
 .then(data => {
-    console.log(`${data.status} ${data.message}`);
+    console.log(data);
   if (data.status==200){
-      location.href = "http://localhost:8080/SocialForge/views/dashboard.html";
+      localStorage.setItem("userInfo",JSON.stringify(data.data));
+      location.href = "./../views/dashboard.html";
   }else{
-      alert("Error al iniciar sesion, status:"+data.status);
+      alert(data.message+", status("+data.status+")");
   }
 });
 }

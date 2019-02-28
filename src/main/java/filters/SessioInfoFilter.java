@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(filterName = "SessioInfoFilter", servletNames = {"SessionInfoServlet"})
+@WebFilter(filterName = "SessioInfoFilter", urlPatterns = {"/session-info"})
 public class SessioInfoFilter implements Filter {
     
     public SessioInfoFilter() {

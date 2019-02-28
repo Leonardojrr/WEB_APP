@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package handlers;
 
 import Models.MessageModel;
@@ -18,16 +14,13 @@ import utils.Encrypter;
 import utils.PropReader;
 import utils.SuperMapper;
 
-/**
- *
- * @author Emilio
- */
 public class SessionHandler {
 
   private DBConnection db;
   private PropReader prpReader;
   private SuperMapper jackson;
   private ResultSet rs;
+  
 
   public String loginUser(HttpServletRequest request) throws SQLException {
     ObjectMapper objM = new ObjectMapper();
@@ -42,12 +35,11 @@ public class SessionHandler {
        SessionModel userSession = new SessionModel();
        userSession.setData(rs);
        HttpSession session = request.getSession();
-       session.setAttribute("user", objM.writeValueAsString(userSession));
+       session.setAttribute("user", userSession);
        MessageModel msgToUser = new MessageModel();
-       //msgToUser.setMsg(200, "login Successful");
        msgToUser.setStatus(200);
        msgToUser.setMessage("login Successful");
-       msgToUser.setData(user.getUsername());
+       msgToUser.setData(userSession.getUsername());
        resp = objM.writeValueAsString(msgToUser);
       } 
       else {

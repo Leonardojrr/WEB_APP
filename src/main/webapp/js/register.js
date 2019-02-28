@@ -20,11 +20,11 @@ function register() {
 fetch("./../register", params)
 .then(resp => resp.json())
 .then(data => {
-    console.log(`${data.status} ${data.message}`);
+    console.log(data);
   if (data.status==200){
-      location.href = "http://localhost:8080/SocialForge/views/login.html";
+      location.href = "./../views/login.html";
   }else{
-      alert("Error al iniciar sesion, status:"+data.status);
+    alert(data.message+", status("+data.status+")");
   }
 });
 }

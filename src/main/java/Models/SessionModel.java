@@ -1,19 +1,26 @@
 
 package Models;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
 public class SessionModel {
     private String username, name,last_name, email,avatar;
+    private boolean sex;
+    private Date birthday;
+    private int id;
     
     public void setData(ResultSet rs) throws SQLException{
-        this.username = rs.getString("user_username");
-        this.name = rs.getString("user_name");
-        this.last_name = rs.getString("user_lastname");
-        this.email = rs.getString("user_email");
-        this.avatar = rs.getString("user_avatar");
+        this.setId(rs.getInt(1));
+        this.setUsername(rs.getString(2));
+        this.setName(rs.getString(4));
+        this.setLast_name(rs.getString(5));
+        this.setEmail(rs.getString(6));
+        this.setBirthday(rs.getDate(7));
+        this.setAvatar(rs.getString(9));
+        this.setSex(rs.getBoolean(11));
     }
    
     public String getUsername() {
@@ -55,8 +62,28 @@ public class SessionModel {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
-    public String toString(){
-        String json = "{"+"}";
-        return json;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isSex() {
+        return sex;
+    }
+
+    public void setSex(boolean sex) {
+        this.sex = sex;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 }

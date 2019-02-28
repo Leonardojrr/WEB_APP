@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(filterName = "Session Filter", servletNames = {"SessionServlet"})
+@WebFilter(filterName = "Session Filter", urlPatterns = {"/session"})
 public class SessionFilter implements Filter {
     
     public SessionFilter() {
@@ -26,7 +26,6 @@ public class SessionFilter implements Filter {
       HttpServletRequest req = (HttpServletRequest) request;
       HttpServletResponse resp = (HttpServletResponse) response;
       String json;
-      resp.setContentType("application/json");
       PrintWriter out = resp.getWriter();
       ObjectMapper objM = new ObjectMapper();
       HttpSession session = req.getSession(false);
@@ -35,8 +34,8 @@ public class SessionFilter implements Filter {
       }
       else{
           MessageModel msgToUser = new MessageModel();
-          msgToUser.setStatus(403);
           msgToUser.setMessage("Already logged in");
+          msgToUser.setStatus(403);
           json = objM.writeValueAsString(msgToUser);
           out.print(json);
       }

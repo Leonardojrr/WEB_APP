@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author XxlrgamersxX
  */
-@WebFilter(filterName = "LogOutFilter", servletNames = {"LogOutServlet"})
+@WebFilter(filterName = "LogOutFilter", urlPatterns = {"/logout"})
 public class LogOutFilter implements Filter {
  
     public LogOutFilter() {

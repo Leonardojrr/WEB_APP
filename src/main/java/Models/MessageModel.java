@@ -6,15 +6,14 @@ public class MessageModel<T> {
   private Integer status;
   private T data;
 
-  public T getData() {
-    return data;
-  }
+    public T getData() {
+        return data;
+    }
 
-  public void setData(T data) {
-    this.data = data;
-  }
-
-
+    public void setData(T data) {
+        this.data = data;
+    }
+  
   public String getMessage() {
     return message;
   }

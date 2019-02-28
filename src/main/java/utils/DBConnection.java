@@ -15,7 +15,7 @@ import java.sql.Timestamp;
  * @author Hijos
  */
 public class DBConnection {
-		private Timestamp ts;
+        private Timestamp ts;
 	private Connection con;
 	private PreparedStatement pstm,validate_pstm;
 	private ResultSet rs;
@@ -60,7 +60,7 @@ public class DBConnection {
   }
     
   //Sentencias de modificaciones a la DB
-  public int update(String query, Object... values) {
+  public void update(String query, Object... values) {
     try {
       this.pstm = this.con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
@@ -70,8 +70,7 @@ public class DBConnection {
       this.res = this.pstm.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
-    }
-    return this.res;
+    }  
   }
 
   public Timestamp currentTimestamp() {
