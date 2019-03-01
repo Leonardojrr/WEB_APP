@@ -3,10 +3,30 @@ function $(id){
 }
 window.onload = ()=>{
     let user = $("username");
-   // user.innerHTML='<i class="material-icons left">account_circle</i>'+localStorage.getItem("userInfo");
+    let username = $('userN');
+    let name = $('name');
+    let lastname = $('lastName');
+    let birthday = $('birthday');
+    let gender = $('gender');
+    let email = $('email');
+    let dataUser = JSON.parse(localStorage.getItem("userInfo"));
+    user.innerHTML = '<i class="material-icons left">account_circle</i>'+ dataUser.username;
+    username.innerHTML = dataUser.username;
+    name.innerHTML = dataUser.name;
+    lastname.innerHTML = dataUser.last_name;
+    birthday.innerHTML = dataUser.birthday;
+    if(dataUser.sex == true){
+    gender.innerHTML = "Masculino"
+    }else{
+        gender.innerHTML = "Femenino"
+    }
+    email.innerHTML = dataUser.email;
+
+    console.log(dataUser);
 }
-let info = $('info').style.height = 100+"vw" - 64+"px";
-let info1 = $('info1').style.height = 100+"vw" - 64+"px";
+let info = $('info').style.height = "100vw" - 64+"px";
+let info1 = $('info1').style.height = "100vw" - 64+"px";
+
 function out() {
     params={
         method: "POST", 

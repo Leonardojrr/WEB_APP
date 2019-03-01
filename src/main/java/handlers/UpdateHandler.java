@@ -26,7 +26,7 @@ public class UpdateHandler {
     SessionModel userSession = jackson.jsonToPlainObj(request, SessionModel.class);
     HttpSession session = request.getSession();
     session.setAttribute("user", userSession);
-    db.update(prpReader.getValue("updateUser"), userSession.getName(),userSession.getLast_name(),userSession.getEmail(),userSession.getBirthday(),userSession.getAvatar(),userSession.isSex(),userSession.getUsername());
+    db.update(prpReader.getValue("updateUser"), userSession.getName(),userSession.getLast_name(),userSession.getEmail(),userSession.getBirthday(),userSession.isSex(),userSession.getUsername());
     
     MessageModel msgToUser = new MessageModel();
     msgToUser.setStatus(200);

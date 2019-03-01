@@ -34,18 +34,18 @@ height:100%;
           </div>
         </nav>
         <div class="row" style="margin-bottom: 0;overflow: hidden;">
-                <div id="info" class="col s3 white " style="padding-bottom: 10%;">
+                <div id="info" class="col s3 white " style="padding-bottom: 8%">
                   <!-- Grey navigation panel -->
-                  <div class="center white" style="margin-bottom: 20%;margin-top: 15%;border-radius: 1%">
+                  <div class="center white" style="margin-bottom: 20%;margin-top: 15%;border-radius: 1%;">
                         <i class="large material-icons">account_circle</i>
                         <br>
-                        <h4>User</h4>
+                        <p id="userN" style="font-size: 30px"></p>
                   </div>
-                  <div  class="white">
+                  <div  class="white" >
                             <div class="collection">
                               <a href="#!" class="collection-item grey-text text-darken-4"><i class="material-icons left">person_add</i>Añadir amigo</a>
                               <a href="#!" class="collection-item grey-text text-darken-4"><i class="material-icons left">people</i>Amigos</a>
-                              <a href="#!" class="collection-item grey-text text-darken-4"><i class="material-icons left">https</i>Configuracion</a>
+                              <a href="./../views/edit.html" class="collection-item grey-text text-darken-4"><i class="material-icons left">https</i>Cambiar datos</a>
                             </div>
                   </div>
                 </div>
@@ -55,12 +55,12 @@ height:100%;
                   
                   <div class="section"style="margin:0 0 0% 5%">
                     <h5>Datos</h5>
-                    <p style="font-size: 19px"><span>Nombre:</span> <span style="margin-right: 2%">Name</span>
-                    <span>Apellido:</span> <span style="margin-right: 2%">Lastname</span>
-                    <span>Usuario:</span> <span style="margin-right: 2%">UserName</span>
-                    <span>Fecha de nacimiento:</span> <span style="margin-right: 10%">1997-11-29</span>
-                    <span>Genero:</span> <span style="margin-right: 2%">Masculino</span>
-                    <span>Correo:</span> <span>pringles212@gmail.com</span>
+                    <p style="font-size: 20px">
+                    <span>Nombre:</span> <span id="name" style="margin-right: 2%"></span>
+                    <span>Apellido:</span> <span id="lastName" style="margin-right: 2%"></span>
+                    <span>Fecha de nacimiento:</span> <span id="birthday" style="margin-right: 2%"></span>
+                    <span>Genero:</span> <span id="gender" style="margin-right: 2%"></span> <br>
+                    <span>Correo:</span> <span id="email" style="margin-right: 2%"></span>
                     </p>
                   </div>
                   <div class="divider black"></div>
@@ -69,7 +69,7 @@ height:100%;
                     <p>Stuff</p>
                   </div>
                   <div class="divider black"></div>
-                  <div class="section"style="margin:0 0 7% 5%">
+                  <div class="section"style="margin:0 0 9% 5%">
                     <h5>Post</h5>
                     <p>Stuff</p>
                   </div>

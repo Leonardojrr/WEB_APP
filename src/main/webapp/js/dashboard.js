@@ -3,7 +3,9 @@ function $(id){
 }
 window.onload = ()=>{
     let user = $("username");
-    user.innerHTML='<i class="material-icons left">account_circle</i>'+JSON.parse(localStorage.getItem("userInfo"));
+    let dataUser = JSON.parse(localStorage.getItem("userInfo")); 
+    user.innerHTML='<i class="material-icons left">account_circle</i>'+ dataUser.username;
+    console.log(dataUser);
 }
 function out() {
     params={

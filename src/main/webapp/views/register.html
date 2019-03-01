@@ -8,43 +8,7 @@
     <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <style>
-input{
-    color:white;
-}
-[type="radio"].with-gap:checked+span:after {
-    background-color: white;
-}
-[type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:before, [type="radio"].with-gap:checked+span:after {
-    border: 2px solid white;
-}
-.modal {
-    background-color:#212121 ;
-  }
-  .datepicker-date-display {
-    background-color:#C62828 ;
-  }
-  .datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done{
-    color: #C62828
-  }
-.datepicker-table td.is-today {
-  color: #C62828
-}
-.datepicker-table td.is-selected {
-  background-color: #424242;
-}
-input:not([type]):not([readonly]):focus, input[type=text]:not([readonly]):not(.browser-default):focus, 
-input[type=password]:not([readonly]):not(.browser-default):focus, input[type=email]:not([readonly]):not(.browser-default):focus{
-  border-bottom-color: #C62828;
-  -webkit-box-shadow:0 1px 0 0 #C62828;
-  box-shadow:0px 1px 0px 0px #C62828;
-}
-input:not([type]):not([readonly]):focus + label, input[type=text]:not([readonly]):not(.browser-default):focus + label, 
-input[type=password]:not([readonly]):not(.browser-default):focus + label, input[type=email]:not([readonly]):not(.browser-default):focus + label{
-  color: #C62828;
-}
-    </style>
-
+    <link rel="stylesheet" href="./../css/register.css">
   </head>
 
   <body class="black">
@@ -115,7 +79,7 @@ input[type=password]:not([readonly]):not(.browser-default):focus + label, input[
                         </div>
                     </form>
                     <div class="col s12">
-                            <a id="regbtn" onclick="register()" class="white-text red darken-3 btn">Registrar</a>    
+                            <a onclick="register()" class="white-text red darken-3 btn">Registrar</a>    
                       </div>
                     
                   </div>
