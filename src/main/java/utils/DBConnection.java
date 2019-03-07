@@ -15,17 +15,17 @@ import java.sql.Timestamp;
  * @author Hijos
  */
 public class DBConnection {
-        private Timestamp ts;
+  private Timestamp ts;
 	private Connection con;
 	private PreparedStatement pstm,validate_pstm;
 	private ResultSet rs;
-        boolean valid_user;
+  boolean valid_user;
+  private PropReader prpReader = PropReader.getInstance();;
 	private int res;
-        
-	public DBConnection(String driver, String url, String usr, String pwd) {
+	public DBConnection() {
 		try {
-                    Class.forName(driver);
-                    this.con = DriverManager.getConnection(url, usr, pwd);
+                    Class.forName(prpReader.getValue("dbDriver"));
+                    this.con = DriverManager.getConnection(prpReader.getValue("dbUrl"), prpReader.getValue("dbUser"), prpReader.getValue("dbPassword"));
 		} catch (ClassNotFoundException | SQLException e) {
                     e.printStackTrace();
 		}

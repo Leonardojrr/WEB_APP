@@ -1,6 +1,6 @@
 package handlers;
 
-import Models.MessageModel;
+import Models.ResponseModel;
 import Models.UserModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.sql.SQLException;
@@ -19,10 +19,10 @@ public class RegisterHandler {
   public String insertUser(HttpServletRequest request) throws SQLException {
     ObjectMapper objM = new ObjectMapper();
     prpReader = PropReader.getInstance();
-    db = new DBConnection(prpReader.getValue("dbDriver"), prpReader.getValue("dbUrl"), prpReader.getValue("dbUser"), prpReader.getValue("dbPassword"));
+    db = new DBConnection();
     jackson = new SuperMapper();
     String resp = "";
-     MessageModel msgToUser = new MessageModel();
+     ResponseModel msgToUser = new ResponseModel();
 
     System.out.print("Response:" + resp);
     try {

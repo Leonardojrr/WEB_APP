@@ -1,7 +1,7 @@
 
 package filters;
 
-import Models.MessageModel;
+import Models.ResponseModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,7 +33,7 @@ public class SessionFilter implements Filter {
           chain.doFilter(req, resp);
       }
       else{
-          MessageModel msgToUser = new MessageModel();
+          ResponseModel msgToUser = new ResponseModel();
           msgToUser.setMessage("Already logged in");
           msgToUser.setStatus(403);
           json = objM.writeValueAsString(msgToUser);

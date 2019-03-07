@@ -1,6 +1,21 @@
 function $(id){
     return document.getElementById(id);
 }
+window.onload = ()=>{
+    let user = $("username");
+    let name = $('name');
+    let lastname = $('lastName');
+    let birthday = $('birthday');
+    let email = $('email');
+    let dataUser = JSON.parse(localStorage.getItem("userInfo"));
+    user.innerHTML = '<i class="material-icons left">account_circle</i>'+ dataUser.username;
+    name.value = dataUser.name;
+    lastname.value = dataUser.last_name;
+    birthday.value = dataUser.birthday;
+    email.value = dataUser.email;
+
+    console.log(dataUser);
+}
 function update() {
     let dataUser = JSON.parse(localStorage.getItem("userInfo"));
     let data={
@@ -8,7 +23,7 @@ function update() {
         last_name:$('lastName').value,
         username:dataUser.username,
         email:$('email').value,
-        birthday:$('date').value,
+        birthday:$('date').M_Datepicker.date.toJSON(),
         sex: $('male').checked,
     },
     params={
@@ -21,7 +36,6 @@ fetch("./../update", params)
 .then(data => {
     console.log(data);
   if (data.status==200){
-      localStorage.clear();
       localStorage.setItem("userInfo",JSON.stringify(data.data));
       location.href = "./../views/profile.html";
   }else{
@@ -49,4 +63,7 @@ fetch("./../LogOutServlet", params)
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.datepicker');
     var instances = M.Datepicker.init(elems,{ format:"yyyy-mm-dd",yearRange:[1910,2019]});
+  });
+  document.addEventListener('DOMContentLoaded', function() {
+M.updateTextFields();
   });

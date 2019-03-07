@@ -1,7 +1,7 @@
 
 package handlers;
 
-import Models.MessageModel;
+import Models.ResponseModel;
 import Models.SessionModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class UpdateHandler {
   public String updateUser(HttpServletRequest request) throws SQLException, IOException {
     ObjectMapper objM = new ObjectMapper();
     prpReader = PropReader.getInstance();
-    db = new DBConnection(prpReader.getValue("dbDriver"), prpReader.getValue("dbUrl"), prpReader.getValue("dbUser"), prpReader.getValue("dbPassword"));
+    db = new DBConnection();
     jackson = new SuperMapper();
     String resp=""; 
     SessionModel userSession = jackson.jsonToPlainObj(request, SessionModel.class);
@@ -28,7 +28,7 @@ public class UpdateHandler {
     session.setAttribute("user", userSession);
     db.update(prpReader.getValue("updateUser"), userSession.getName(),userSession.getLast_name(),userSession.getEmail(),userSession.getBirthday(),userSession.isSex(),userSession.getUsername());
     
-    MessageModel msgToUser = new MessageModel();
+    ResponseModel msgToUser = new ResponseModel();
     msgToUser.setStatus(200);
     msgToUser.setMessage("Update Successful");
     msgToUser.setData(userSession);

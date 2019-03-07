@@ -1,7 +1,7 @@
 
 package filters;
 
-import Models.MessageModel;
+import Models.ResponseModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,7 +38,7 @@ public class LogOutFilter implements Filter {
           chain.doFilter(req, resp);
       }
       else{
-          MessageModel msgToUser = new MessageModel();
+          ResponseModel msgToUser = new ResponseModel();
           msgToUser.setStatus(401);
           msgToUser.setMessage("Not Logged In");          
           json = objM.writeValueAsString(msgToUser);

@@ -1,7 +1,7 @@
 
 package Models;
 
-public class MessageModel<T> {
+public class ResponseModel<T> {
   private String message;
   private Integer status;
   private T data;

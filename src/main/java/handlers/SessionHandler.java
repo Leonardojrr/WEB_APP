@@ -1,7 +1,7 @@
 
 package handlers;
 
-import Models.MessageModel;
+import Models.ResponseModel;
 import Models.SessionModel;
 import Models.UserModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,7 +25,7 @@ public class SessionHandler {
   public String loginUser(HttpServletRequest request) throws SQLException {
     ObjectMapper objM = new ObjectMapper();
     prpReader = PropReader.getInstance();
-    db = new DBConnection(prpReader.getValue("dbDriver"), prpReader.getValue("dbUrl"), prpReader.getValue("dbUser"), prpReader.getValue("dbPassword"));
+    db = new DBConnection();
     jackson = new SuperMapper();
     String resp=""; 
     try {
@@ -36,14 +36,14 @@ public class SessionHandler {
        userSession.setData(rs);
        HttpSession session = request.getSession();
        session.setAttribute("user", userSession);
-       MessageModel msgToUser = new MessageModel();
+       ResponseModel msgToUser = new ResponseModel();
        msgToUser.setStatus(200);
        msgToUser.setMessage("login Successful");
        msgToUser.setData(userSession);
        resp = objM.writeValueAsString(msgToUser);
       } 
       else {
-          MessageModel msgToUser = new MessageModel();
+          ResponseModel msgToUser = new ResponseModel();
           //msgToUser.setMsg(401, "Not Logged In");
           msgToUser.setStatus(401);
           msgToUser.setMessage("Not Logged In");

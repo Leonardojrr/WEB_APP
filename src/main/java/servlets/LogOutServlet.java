@@ -1,7 +1,7 @@
 
 package servlets;
 
-import Models.MessageModel;
+import Models.ResponseModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +19,7 @@ public class LogOutServlet extends HttpServlet {
         ObjectMapper objM = new ObjectMapper();
         response.setContentType("application/json");
         request.getSession().invalidate();
-        MessageModel msgToUser = new MessageModel();
+        ResponseModel msgToUser = new ResponseModel();
         msgToUser.setStatus(200);
         msgToUser.setMessage("Session finished");        
         String json = objM.writeValueAsString(msgToUser);
