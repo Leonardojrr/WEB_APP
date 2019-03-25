@@ -23,7 +23,7 @@ function update() {
         last_name:$('lastName').value,
         username:dataUser.username,
         email:$('email').value,
-        birthday:$('date').M_Datepicker.date.toJSON(),
+        birthday:$('birthday').value,
         sex: $('male').checked,
     },
     params={

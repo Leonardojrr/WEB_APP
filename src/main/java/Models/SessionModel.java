@@ -7,9 +7,8 @@ import java.sql.SQLException;
 
 
 public class SessionModel {
-    private String username, name,last_name, email,avatar;
+    private String username, name,last_name, email,avatar,birthday;
     private boolean sex;
-    private Date birthday;
     private int id;
     
     public void setData(ResultSet rs) throws SQLException{
@@ -18,7 +17,7 @@ public class SessionModel {
         this.setName(rs.getString(4));
         this.setLast_name(rs.getString(5));
         this.setEmail(rs.getString(6));
-        this.setBirthday(rs.getDate(7));
+        this.setBirthday(rs.getString(7));
         this.setAvatar(rs.getString(9));
         this.setSex(rs.getBoolean(11));
     }
@@ -79,11 +78,11 @@ public class SessionModel {
         this.sex = sex;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 }

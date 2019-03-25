@@ -24,6 +24,10 @@
         <servlet-name>UpdateServlet</servlet-name>
         <servlet-class>servlets.UpdateServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchUsersServlet</servlet-name>
+        <servlet-class>servlets.SearchUsersServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SessionServlet</servlet-name>
         <url-pattern>/SessionServlet</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>UpdateServlet</servlet-name>
         <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchUsersServlet</servlet-name>
+        <url-pattern>/SearchUsersServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

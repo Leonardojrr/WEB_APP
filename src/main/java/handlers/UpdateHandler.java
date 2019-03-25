@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import utils.DBConnection;
+import utils.DateDB;
 import utils.PropReader;
 import utils.SuperMapper;
 
@@ -22,11 +23,12 @@ public class UpdateHandler {
     prpReader = PropReader.getInstance();
     db = new DBConnection();
     jackson = new SuperMapper();
-    String resp=""; 
+    String resp; 
     SessionModel userSession = jackson.jsonToPlainObj(request, SessionModel.class);
+    java.util.Date birthday = DateDB.getBirthdayFromString(userSession.getBirthday());
     HttpSession session = request.getSession();
     session.setAttribute("user", userSession);
-    db.update(prpReader.getValue("updateUser"), userSession.getName(),userSession.getLast_name(),userSession.getEmail(),userSession.getBirthday(),userSession.isSex(),userSession.getUsername());
+    db.update(prpReader.getValue("updateUser"), userSession.getName(),userSession.getLast_name(),userSession.getEmail(),birthday,userSession.isSex(),userSession.getUsername());
     
     ResponseModel msgToUser = new ResponseModel();
     msgToUser.setStatus(200);

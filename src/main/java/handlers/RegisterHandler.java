@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import utils.DBConnection;
+import utils.DateDB;
 import utils.Encrypter;
 import utils.PropReader;
 import utils.SuperMapper;
@@ -27,10 +28,11 @@ public class RegisterHandler {
     System.out.print("Response:" + resp);
     try {
       UserModel user = jackson.jsonToPlainObj(request, UserModel.class);
+      java.util.Date birthday = DateDB.getBirthdayFromString(user.getBirthday());
       boolean isValid = !db.validateUser(prpReader.getValue("checkUser"), user.getUsername(),user.getEmail());
                 if(isValid){
                 db.update(prpReader.getValue("registerUser"),user.getUsername(),
-                Encrypter.getMD5(user.getPassword()),user.getName(),user.getLastName(),user.getEmail(),user.getBirthday(),db.currentTimestamp(),
+                Encrypter.getMD5(user.getPassword()),user.getName(),user.getLastName(),user.getEmail(),birthday,db.currentTimestamp(),
                 user.isSex());
                 msgToUser.setStatus(200);
                 msgToUser.setMessage("Registro exitoso");

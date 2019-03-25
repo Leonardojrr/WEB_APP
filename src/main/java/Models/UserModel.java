@@ -1,14 +1,21 @@
 
 package Models;
 
-import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 public class UserModel {
-    private String name,lastName,password,email,username;
-    private Date birthday;
+    private String name,lastName,password,email,username,birthday;
     private int typeId;
     private boolean sex;
     private boolean enabled;
+    
+        public void setData(ResultSet rs) throws SQLException{
+        this.setUsername(rs.getString(1));
+        this.setName(rs.getString(2));
+        this.setLastName(rs.getString(3));
+    }
 
   public String getLastName() {
     return lastName;
@@ -18,11 +25,11 @@ public class UserModel {
     this.lastName = lastName;
   }
 
-  public Date getBirthday() {
+  public String getBirthday() {
     return birthday;
   }
 
-  public void setBirthday(Date birthday) {
+  public void setBirthday(String birthday) {
     this.birthday = birthday;
   }
 
