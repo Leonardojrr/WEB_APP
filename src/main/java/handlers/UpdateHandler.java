@@ -3,7 +3,6 @@ package handlers;
 
 import Models.ResponseModel;
 import Models.SessionModel;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,6 @@ public class UpdateHandler {
   private SuperMapper jackson;
   
   public String updateUser(HttpServletRequest request) throws SQLException, IOException {
-    ObjectMapper objM = new ObjectMapper();
     prpReader = PropReader.getInstance();
     db = new DBConnection();
     jackson = new SuperMapper();
@@ -34,8 +32,7 @@ public class UpdateHandler {
     msgToUser.setStatus(200);
     msgToUser.setMessage("Update Successful");
     msgToUser.setData(userSession);
-    
-    resp = objM.writeValueAsString(msgToUser);
+    resp = jackson.plainObjToJson(msgToUser);
     return resp;
   }
 }

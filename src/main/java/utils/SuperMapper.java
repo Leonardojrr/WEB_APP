@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package utils;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.stream.Collectors;
@@ -20,5 +21,8 @@ public class SuperMapper {
   public <T> T jsonToPlainObj(HttpServletRequest request, Class clase) throws IOException{
       return (T) objMap.readValue(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())), clase);
   }
+      public <T> String plainObjToJson(T data) throws JsonProcessingException{
+        return objMap.writerWithDefaultPrettyPrinter().writeValueAsString(data);
+    }
     
 }

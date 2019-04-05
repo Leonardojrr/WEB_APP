@@ -7,7 +7,6 @@ package handlers;
 
 import Models.ResponseModel;
 import Models.UserModel;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,38 +22,33 @@ import utils.SuperMapper;
 public class SearchUsers {
   private DBConnection db;
   private PropReader prpReader;
-  private SuperMapper jackson;
   private ResultSet rs;
-  
+  private SuperMapper jackson;
 
   public String searchUsers(HttpServletRequest request) throws SQLException {
-    ObjectMapper objM = new ObjectMapper();
+    jackson = new SuperMapper();
     prpReader = PropReader.getInstance();
     db = new DBConnection();
-    jackson = new SuperMapper();
     ResponseModel msgToUser = new ResponseModel();
-    		ArrayList<UserModel> users = new ArrayList<>();
-
+    ArrayList<UserModel> users = new ArrayList<>();
     String resp=""; 
     try {
-      UserModel user = jackson.jsonToPlainObj(request, UserModel.class);
-      rs = db.execute(prpReader.getValue("searchUsers"), user.getUsername(),user.getName(),user.getLastName() );
+      rs = db.search(prpReader.getValue("searchUsers"),request.getParameter("name"));
       while (rs.next()) {
-       user.setData(rs);
-       users.add(user);
+        UserModel user = new UserModel();
+        user.setData(rs);
+        users.add(user);
       } 
-          msgToUser.setData(users);
-          msgToUser.setMessage("List Returned");
-          msgToUser.setStatus(200);
-          resp = objM.writeValueAsString(msgToUser);
-      
-      db.closeCon();
+      msgToUser.setData(users);
+      msgToUser.setMessage("List Returned");
+      msgToUser.setStatus(200);
+      resp = jackson.plainObjToJson(msgToUser);
     } catch (Exception e) {
       e.printStackTrace();
       msgToUser.setMessage("DB Connection Error");
 			msgToUser.setStatus(500);
     }
-
+    db.closeCon();
     return resp;
   }
 }

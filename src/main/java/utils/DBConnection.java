@@ -58,6 +58,14 @@ public class DBConnection {
     }
     return this.valid_user;
   }
+    public ResultSet search(String query, String name) throws SQLException{
+    	this.pstm = this.con.prepareStatement(query);
+			this.pstm .setObject(1, name);
+			this.pstm .setObject(2, name);
+			this.pstm .setObject(3, name);
+			this.rs = this.pstm.executeQuery();
+      return this.rs;
+    }
     
   //Sentencias de modificaciones a la DB
   public void update(String query, Object... values) {

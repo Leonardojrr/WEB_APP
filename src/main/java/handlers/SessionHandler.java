@@ -4,7 +4,6 @@ package handlers;
 import Models.ResponseModel;
 import Models.SessionModel;
 import Models.UserModel;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +22,6 @@ public class SessionHandler {
   
 
   public String loginUser(HttpServletRequest request) throws SQLException {
-    ObjectMapper objM = new ObjectMapper();
     prpReader = PropReader.getInstance();
     db = new DBConnection();
     jackson = new SuperMapper();
@@ -40,14 +38,13 @@ public class SessionHandler {
        msgToUser.setStatus(200);
        msgToUser.setMessage("login Successful");
        msgToUser.setData(userSession);
-       resp = objM.writeValueAsString(msgToUser);
+       resp = jackson.plainObjToJson(msgToUser);
       } 
       else {
           ResponseModel msgToUser = new ResponseModel();
-          //msgToUser.setMsg(401, "Not Logged In");
           msgToUser.setStatus(401);
           msgToUser.setMessage("Not Logged In");
-          resp = objM.writeValueAsString(msgToUser);
+          resp = jackson.plainObjToJson(msgToUser);
       }
       db.closeCon();
     } catch (Exception e) {

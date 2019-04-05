@@ -2,7 +2,6 @@ package handlers;
 
 import Models.ResponseModel;
 import Models.UserModel;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import utils.DBConnection;
@@ -18,7 +17,6 @@ public class RegisterHandler {
   private SuperMapper jackson;
 
   public String insertUser(HttpServletRequest request) throws SQLException {
-    ObjectMapper objM = new ObjectMapper();
     prpReader = PropReader.getInstance();
     db = new DBConnection();
     jackson = new SuperMapper();
@@ -36,12 +34,12 @@ public class RegisterHandler {
                 user.isSex());
                 msgToUser.setStatus(200);
                 msgToUser.setMessage("Registro exitoso");
-                resp = objM.writeValueAsString(msgToUser);
+                resp = jackson.plainObjToJson(msgToUser);
                 }
                 else{
                 msgToUser.setStatus(401);
                 msgToUser.setMessage("Usuario o Email ya registrado");
-                resp = objM.writeValueAsString(msgToUser);
+                resp = jackson.plainObjToJson(msgToUser);
                 }
       db.closeCon();
     } catch (Exception e) {

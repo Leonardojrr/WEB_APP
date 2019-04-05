@@ -6,17 +6,25 @@ import java.sql.SQLException;
 
 
 public class UserModel {
-    private String name,lastName,password,email,username,birthday;
+    private String name,lastName,password,email,username,birthday,avatar;
     private int typeId;
     private boolean sex;
     private boolean enabled;
-    
+    //para guardar la info de usuarios registrados
         public void setData(ResultSet rs) throws SQLException{
         this.setUsername(rs.getString(1));
         this.setName(rs.getString(2));
         this.setLastName(rs.getString(3));
+        this.setAvatar(rs.getString(4));
     }
 
+  public String getAvatar() {
+    return avatar;
+  }
+
+  public void setAvatar(String avatar) {
+    this.avatar = avatar;
+  }
   public String getLastName() {
     return lastName;
   }
