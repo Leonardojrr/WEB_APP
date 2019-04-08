@@ -16,6 +16,7 @@ public class UserModel {
         this.setName(rs.getString(2));
         this.setLastName(rs.getString(3));
         this.setAvatar(rs.getString(4));
+        this.setBirthday(rs.getString(5));
     }
 
   public String getAvatar() {

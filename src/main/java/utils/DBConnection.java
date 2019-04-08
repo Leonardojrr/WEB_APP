@@ -45,12 +45,12 @@ public class DBConnection {
     return this.rs;
   }
   
-    public boolean validateUser(String query,String userName,String Email) throws SQLException {
+    public boolean validate(String query,String param1,String param2) throws SQLException {
     try {
       this.validate_pstm = this.con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
-      this.validate_pstm.setObject(1, userName);
-      this.validate_pstm.setObject(2, Email);
+      this.validate_pstm.setObject(1, param1);
+      this.validate_pstm.setObject(2, param2);
       
       this.rs = this.validate_pstm.executeQuery();
       this.valid_user = this.rs.next();
@@ -58,14 +58,7 @@ public class DBConnection {
     }
     return this.valid_user;
   }
-    public ResultSet search(String query, String name) throws SQLException{
-    	this.pstm = this.con.prepareStatement(query);
-			this.pstm .setObject(1, name);
-			this.pstm .setObject(2, name);
-			this.pstm .setObject(3, name);
-			this.rs = this.pstm.executeQuery();
-      return this.rs;
-    }
+
     
   //Sentencias de modificaciones a la DB
   public void update(String query, Object... values) {
