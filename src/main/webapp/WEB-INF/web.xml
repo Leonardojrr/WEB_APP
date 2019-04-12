@@ -50,11 +50,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
-        <url-pattern>/SearchServlet</url-pattern>
+        <url-pattern>/search</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FriendServlet</servlet-name>
-        <url-pattern>/FriendServlet</url-pattern>
+        <url-pattern>/friend</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

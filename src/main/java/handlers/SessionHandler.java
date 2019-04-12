@@ -35,7 +35,8 @@ public class SessionHandler {
        SessionModel userSession = new SessionModel();
        userSession.setData(rs);
        HttpSession session = request.getSession();
-       session.setAttribute("user", userSession);
+       session.setAttribute("user", userSession.getUsername());
+        System.out.println(session.getAttribute("user").toString());
        msgToUser.setStatus(200);
        msgToUser.setMessage("login Successful");
        msgToUser.setData(userSession);

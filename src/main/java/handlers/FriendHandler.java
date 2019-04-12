@@ -32,7 +32,7 @@ public class FriendHandler {
     db = new DBConnection();
     ResponseModel msgToUser = new ResponseModel();
     String resp="";
-    String user1 = request.getParameter("user1");
+    String user1 = request.getSession(false).getAttribute("user").toString();
     String user2 = request.getParameter("user2");
     try {
       boolean validate = db.validate(prpReader.getValue("isFriend"), user1, user2);
@@ -41,11 +41,11 @@ public class FriendHandler {
       db.update(prpReader.getValue("addFriend"), user1, user2, user1, user2);
 			msgToUser.setData("from: "+user1+" To: "+user2);
 			msgToUser.setStatus(200);
-			msgToUser.setMessage("Friend Request Sent");
+			msgToUser.setMessage("New Friend "+user2);
       }else{
 			msgToUser.setData("from: "+user1+" To: "+user2);
 			msgToUser.setStatus(401);
-			msgToUser.setMessage("Already Friend Sent");        
+			msgToUser.setMessage("Already Friend");        
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -63,7 +63,7 @@ public class FriendHandler {
     db = new DBConnection();
     ResponseModel msgToUser = new ResponseModel();
     String resp="";
-    String user1 = request.getParameter("user1");
+    String user1 = request.getSession(false).getAttribute("user").toString();
     String user2 = request.getParameter("user2");
     try {
       db.update(prpReader.getValue("deleteFriend"), user1, user2, user1, user2);
@@ -87,7 +87,7 @@ public class FriendHandler {
     ResponseModel msgToUser = new ResponseModel();
     ArrayList<UserModel> friends = new ArrayList<>();
     String resp="";
-    String username = request.getParameter("user");
+    String username = request.getSession(false).getAttribute("user").toString();
     try {
       rs = db.execute(prpReader.getValue("friendList"), username);
       while (rs.next()) {

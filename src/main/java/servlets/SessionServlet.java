@@ -1,6 +1,7 @@
 
 package servlets;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import handlers.SessionHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @WebServlet(name = "SesionServlet", urlPatterns = {"/session"})
 public class SessionServlet extends HttpServlet {
 

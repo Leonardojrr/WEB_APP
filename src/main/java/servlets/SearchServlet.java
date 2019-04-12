@@ -40,13 +40,25 @@ public class SearchServlet extends HttpServlet {
         try{
             response.setContentType("application/json");
             String op = request.getParameter("op");
-            if(op.equals("1")){
-            String json = search.searchUsers(request);
+            System.out.println(op);
+            String json;
+            switch(op){
+              case "1":
+            json = search.searchUsers(request);
             out.write(json);
-            }else{
-            String json = search.searchFriend(request);
+            break;
+              case "2":
+            json = search.searchFriend(request);
             out.write(json);
+            break;
+              case "3":
+            json = search.getUser(request);
+            out.write(json);
+            break;
+              default:
+                out.write("error");
             }
+
         } catch (SQLException ex) {
       Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
     }
