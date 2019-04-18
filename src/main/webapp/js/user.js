@@ -4,7 +4,13 @@ function $(id){
 function c(clase){
     return document.getElementsByClassName(clase)
 }
-window.onload = ()=>{
+let data = JSON.parse(localStorage.getItem("userInfo"));
+let dataUser;
+let x = location.href.split('?')[1];
+console.log(x)
+
+
+window.onpageshow = ()=>{
     let user = $("username");
     let name = $('name');
     let Name = $('Name');
@@ -12,12 +18,22 @@ window.onload = ()=>{
     let birthday = $('birthday');
     let gender = $('gender');
     let email = $('email');
-    let dataUser = JSON.parse(localStorage.getItem("user"));
-    let data = JSON.parse(localStorage.getItem("userInfo"));
     user.innerHTML = '<i class="material-icons left">account_circle</i>'+ data.username;
+    params={
+        method: "GET", 
+        headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}), 
+}
+    fetch("./../search?"+x, params)
+.then(resp => resp.json())
+.then(data => {
+    console.log(data);
+    if (data.status==200){
+        localStorage.setItem("user",JSON.stringify(data.data));
+         dataUser = data.data;
+
     Name.innerHTML =dataUser.name+'<span id="user" style="font-size: 20px;color: grey;padding-left:3%">'+  dataUser.username+'</span>';
     name.innerText = dataUser.name;
-    lastname.innerHTML = dataUser.last_name;
+    lastname.innerHTML = dataUser.lastName;
     birthday.innerHTML = dataUser.birthday;
     if(dataUser.sex == true){
     gender.innerHTML = "Masculino"
@@ -27,15 +43,23 @@ window.onload = ()=>{
     email.innerHTML = dataUser.email;
 
     console.log(dataUser);
+        
+    }else{
+        alert(data.message+", status("+data.status+")");
+    }
+});
+
 }
 function add(){
+    let dataUser = JSON.parse(localStorage.getItem("user"));
+
     let btn = $('addFriend')
-    let user = $('user').innerHTML;
+    //let user = $('user').innerHTML;
     params={
         method: "POST", 
         headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}), 
 }
-    fetch("./../friend?op=3&user2="+user, params)
+    fetch("./../friend?user1="+data.id+"&user2="+dataUser.id, params)
     .then(resp => resp.json())
     .then(data => {
         console.log(data);

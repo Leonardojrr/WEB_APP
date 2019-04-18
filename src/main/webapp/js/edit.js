@@ -20,7 +20,7 @@ function update() {
     let dataUser = JSON.parse(localStorage.getItem("userInfo"));
     let data={
         name:$('name').value,
-        last_name:$('lastName').value,
+        lastName:$('lastName').value,
         username:dataUser.username,
         email:$('email').value,
         birthday:$('birthday').value,

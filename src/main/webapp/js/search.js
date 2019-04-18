@@ -1,13 +1,22 @@
 function $(id){
     return document.getElementById(id);
 }
-function search(){
-    let user = $('search').value;
+let dataUser = JSON.parse(localStorage.getItem("userInfo"));
+window.onpageshow = ()=>{
+    let user = $("username");
+    user.innerHTML = '<i class="material-icons left">account_circle</i>'+ dataUser.username;
+}
+function search(value){
+    let user = value;
+    console.log(user)
     params={
         method: "GET", 
         headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}), 
 }
-    fetch("./../search?op=1&user="+user, params)
+if(user == null|| user == undefined){
+    console.log('busca pe');
+}else{
+    fetch("./../search?"+user, params)
 .then(resp => resp.json())
 .then(data => {
     console.log(data.data);
@@ -28,37 +37,25 @@ function search(){
             <p><span>BD:</span> 11/12/1997</p>
         </div>
     </div>
-    <a id="profile" class="btn grey darken-4" style="width: 50%;margin-left: 25%">Ver Perfil</a>
+    <a id="${element.id}" href="./../views/user.html?op=3&user=${element.username}" class="btn grey darken-4" style="width: 50%;margin-left: 25%">Ver Perfil</a>
 </div>`
+//$(element.id).addEventListener('click', profile)
 });
-$('profile').addEventListener('click', profile)
+
   }else{
       console.log(1)
     alert(data.message+", status("+data.status+")"+"No se encontro coincidencia");
   }
 });
 }
-function clear(){
-    $('result').innerHTML ='';
 }
-function profile(){
-    let user = $('user').innerHTML;
-    params={
-        method: "GET", 
-        headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}), 
-}
-    fetch("./../search?op=3&user="+user, params)
-.then(resp => resp.json())
-.then(data => {
-    console.log(data);
-    if (data.status==200){
-        localStorage.setItem("user",JSON.stringify(data.data));
-        location.href = "./../views/user.html";
-    }else{
-        alert(data.message+", status("+data.status+")");
-    }
-});
 
-}
-$('search').addEventListener('click', clear);
-$('search').addEventListener('change',search);
+
+
+$('search').addEventListener('keydown',function(e){
+    var key = e.keyCode;
+    if (key === 13) {
+        location.href = "search.html?op=1&user="+$("search").value;
+        e.preventDefault();
+    }
+})

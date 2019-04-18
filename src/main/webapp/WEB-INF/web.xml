@@ -10,11 +10,7 @@
     </filter-mapping>
     <servlet>
         <servlet-name>SessionServlet</servlet-name>
-        <servlet-class>servlets.SessionServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SessionInfoServlet</servlet-name>
-        <servlet-class>servlets.SessionInfoServlet</servlet-class>
+        <servlet-class>servlets.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogOutServlet</servlet-name>
@@ -32,13 +28,25 @@
         <servlet-name>FriendServlet</servlet-name>
         <servlet-class>servlets.FriendServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FileServlet</servlet-name>
+        <servlet-class>servlets.FileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostServlet</servlet-name>
+        <servlet-class>servlets.PostServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LikeServlet</servlet-name>
+        <servlet-class>servlets.LikeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CommentServlet</servlet-name>
+        <servlet-class>servlets.CommentServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SessionServlet</servlet-name>
         <url-pattern>/SessionServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SessionInfoServlet</servlet-name>
-        <url-pattern>/SessionInfoServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LogOutServlet</servlet-name>
@@ -55,6 +63,22 @@
     <servlet-mapping>
         <servlet-name>FriendServlet</servlet-name>
         <url-pattern>/friend</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FileServlet</servlet-name>
+        <url-pattern>/FileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostServlet</servlet-name>
+        <url-pattern>/post</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LikeServlet</servlet-name>
+        <url-pattern>/likes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommentServlet</servlet-name>
+        <url-pattern>/comments</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

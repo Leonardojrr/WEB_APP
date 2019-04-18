@@ -4,7 +4,7 @@ function $(id){
 function c(clase){
     return document.getElementsByClassName(clase)
 }
-window.onload = ()=>{
+window.onpageshow = ()=>{
     let user = $("username");
     let Name = $('name');
     let dataUser = JSON.parse(localStorage.getItem("userInfo"));

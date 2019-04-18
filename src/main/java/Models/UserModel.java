@@ -1,24 +1,50 @@
 
 package Models;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 
 public class UserModel {
     private String name,lastName,password,email,username,birthday,avatar;
-    private int typeId;
-    private boolean sex;
-    private boolean enabled;
-    //para guardar la info de usuarios registrados
-        public void setData(ResultSet rs) throws SQLException{
-        this.setUsername(rs.getString(1));
-        this.setName(rs.getString(2));
-        this.setLastName(rs.getString(3));
-        this.setAvatar(rs.getString(4));
-        this.setBirthday(rs.getString(5));
-        this.setEnabled(true);
+    private int typeId, id;
+    private boolean sex,enabled;
+    private Date creationTime;
+        //para guardar la info de usuarios registrados
+    public void setData(ResultSet rs) throws SQLException{
+	  this.setId(rs.getInt(1));
+		this.setUsername(rs.getString(2));
+		this.setName(rs.getString(5));
+		this.setLastName(rs.getString(6));
+		this.setEmail(rs.getString(7));
+		this.setBirthday(rs.getString(8));
+		this.setCreationTime(rs.getDate(9));
+		this.setAvatar(rs.getString(10));
+		this.setTypeId(rs.getInt(11));
+		this.setSex(rs.getBoolean(12));
+		this.setEnabled(rs.getBoolean(13));
+		this.setPassword(null);
     }
+
+
+  public Date getCreationTime() {
+    return creationTime;
+  }
+
+  public void setCreationTime(Date creationTime) {
+    this.creationTime = creationTime;
+  }
+
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
 
   public String getAvatar() {
     return avatar;

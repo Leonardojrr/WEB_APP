@@ -6,7 +6,6 @@
 package handlers;
 
 import Models.ResponseModel;
-import Models.SessionModel;
 import Models.UserModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.sql.ResultSet;
@@ -34,7 +33,8 @@ public class SearchHandler {
     ResponseModel msgToUser = new ResponseModel();
     ArrayList<UserModel> users = new ArrayList<>();
     String resp="";
-    String search = request.getParameter("user");
+    String search = "%"+request.getParameter("user")+"%";
+    System.out.println(search);
     try {
       rs = db.execute(prpReader.getValue("searchUsers"), search, search, search);
       while (rs.next()) {
@@ -62,7 +62,7 @@ public class SearchHandler {
     ArrayList<UserModel> users = new ArrayList<>();
     String resp="";
     String username = request.getSession(false).getAttribute("user").toString();
-    String search = request.getParameter("param");
+    String search = "%"+request.getParameter("param")+"%";
     try {
       rs = db.execute(prpReader.getValue("searchFriends"), username, search, search, search);
       while (rs.next()) {
@@ -88,7 +88,7 @@ public class SearchHandler {
     db = new DBConnection();
     ResponseModel msgToUser = new ResponseModel();
     String resp="";
-    SessionModel user = new SessionModel();
+    UserModel user = new UserModel();
     String username = request.getParameter("user");
     try {
       rs = db.execute(prpReader.getValue("getUser"), username);

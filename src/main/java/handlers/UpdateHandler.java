@@ -1,7 +1,7 @@
 package handlers;
 
 import Models.ResponseModel;
-import Models.SessionModel;
+import Models.UserModel;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,11 +24,11 @@ public class UpdateHandler {
     String resp;
     ResponseModel msgToUser = new ResponseModel();
     try {
-      SessionModel userSession = jackson.jsonToPlainObj(request, SessionModel.class);
+      UserModel userSession = jackson.jsonToPlainObj(request, UserModel.class);
       java.util.Date birthday = DateDB.getBirthdayFromString(userSession.getBirthday());
       HttpSession session = request.getSession();
-      session.setAttribute("user", userSession);
-      db.update(prpReader.getValue("updateUser"), userSession.getName(), userSession.getLast_name(), userSession.getEmail(), birthday, userSession.isSex(), userSession.getUsername());
+      session.setAttribute("user", userSession.getUsername());
+      db.update(prpReader.getValue("updateUser"), userSession.getName(), userSession.getLastName(), userSession.getEmail(), birthday, userSession.isSex(), userSession.getUsername());
       msgToUser.setStatus(200);
       msgToUser.setMessage("Update Successful");
       msgToUser.setData(userSession);

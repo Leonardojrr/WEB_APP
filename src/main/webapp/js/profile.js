@@ -4,7 +4,7 @@ function $(id){
 function c(clase){
     return document.getElementsByClassName(clase)
 }
-window.onload = ()=>{
+window.onpageshow = ()=>{
     let user = $("username");
     let name = $('name');
     let Name = $('Name');
@@ -16,7 +16,7 @@ window.onload = ()=>{
     user.innerHTML = '<i class="material-icons left">account_circle</i>'+ dataUser.username;
     Name.innerHTML =dataUser.name+'<span id="user" style="font-size: 20px;color: grey">@'+  dataUser.username+'</span>';
     name.innerText = dataUser.name;
-    lastname.innerHTML = dataUser.last_name;
+    lastname.innerHTML = dataUser.lastName;
     birthday.innerHTML = dataUser.birthday;
     if(dataUser.sex == true){
     gender.innerHTML = "Masculino"

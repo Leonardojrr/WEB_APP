@@ -32,18 +32,18 @@ public class FriendHandler {
     db = new DBConnection();
     ResponseModel msgToUser = new ResponseModel();
     String resp="";
-    String user1 = request.getSession(false).getAttribute("user").toString();
-    String user2 = request.getParameter("user2");
+    int user1 = Integer.parseInt(request.getParameter("user1"));
+    int user2 = Integer.parseInt(request.getParameter("user2"));
     try {
       boolean validate = db.validate(prpReader.getValue("isFriend"), user1, user2);
       System.out.println(validate);
       if(!validate){
       db.update(prpReader.getValue("addFriend"), user1, user2, user1, user2);
-			msgToUser.setData("from: "+user1+" To: "+user2);
+			msgToUser.setData(true);
 			msgToUser.setStatus(200);
 			msgToUser.setMessage("New Friend "+user2);
       }else{
-			msgToUser.setData("from: "+user1+" To: "+user2);
+			msgToUser.setData(false);
 			msgToUser.setStatus(401);
 			msgToUser.setMessage("Already Friend");        
       }
@@ -63,11 +63,12 @@ public class FriendHandler {
     db = new DBConnection();
     ResponseModel msgToUser = new ResponseModel();
     String resp="";
-    String user1 = request.getSession(false).getAttribute("user").toString();
-    String user2 = request.getParameter("user2");
+    int user1 = Integer.parseInt(request.getParameter("user1"));
+    int user2 = Integer.parseInt(request.getParameter("user2"));
+        System.out.println(user1+"-"+user2);
     try {
       db.update(prpReader.getValue("deleteFriend"), user1, user2, user1, user2);
-			msgToUser.setData("from: "+user1+" To: "+user2);
+			msgToUser.setData(true);
 			msgToUser.setStatus(200);
 			msgToUser.setMessage("Friend dismiss");
     } catch (Exception e) {
@@ -88,6 +89,8 @@ public class FriendHandler {
     ArrayList<UserModel> friends = new ArrayList<>();
     String resp="";
     String username = request.getSession(false).getAttribute("user").toString();
+    //String username = request.getParameter("user");
+    System.out.println(username);
     try {
       rs = db.execute(prpReader.getValue("friendList"), username);
       while (rs.next()) {

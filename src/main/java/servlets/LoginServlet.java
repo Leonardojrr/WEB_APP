@@ -2,7 +2,7 @@
 package servlets;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import handlers.SessionHandler;
+import handlers.LoginHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @WebServlet(name = "SesionServlet", urlPatterns = {"/session"})
-public class SessionServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
 
@@ -28,14 +28,14 @@ public class SessionServlet extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-    SessionHandler loginUser = new SessionHandler();
+    LoginHandler loginUser = new LoginHandler();
     PrintWriter out = response.getWriter();
         try{
             response.setContentType("application/json");
             String json = loginUser.loginUser(request);
             out.write(json);
         } catch (SQLException ex) {
-      Logger.getLogger(SessionServlet.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
     }
 
   }

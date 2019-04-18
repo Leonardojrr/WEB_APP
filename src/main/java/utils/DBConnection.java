@@ -45,7 +45,7 @@ public class DBConnection {
     return this.rs;
   }
   
-    public boolean validate(String query,String param1,String param2) throws SQLException {
+    public boolean validate(String query,Object param1,Object param2) throws SQLException {
     try {
       this.validate_pstm = this.con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
