@@ -31,15 +31,15 @@ public class LoginHandler {
       UserModel user = jackson.jsonToPlainObj(request, UserModel.class);
       rs = db.execute(prpReader.getValue("loginUser"), user.getUsername(), Encrypter.getMD5(user.getPassword()));
       if (rs.next()) {
-       UserModel userSession = new UserModel();
-       userSession.setData(rs);
+       user.setData(rs);
        HttpSession session = request.getSession();
        session.setAttribute("user_id", user.getId());
-       session.setAttribute("user", userSession.getUsername());
-       System.out.println(userSession.getCreationTime().toString());
+       session.setAttribute("user", user.getUsername());
+       System.out.println(session.getAttribute("user_id").toString());
+       System.out.println(session.getAttribute("user").toString());       
        msgToUser.setStatus(200);
        msgToUser.setMessage("login Successful");
-       msgToUser.setData(userSession);
+       msgToUser.setData(user);
       } 
       else {
           msgToUser.setStatus(401);

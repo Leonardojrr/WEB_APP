@@ -9,13 +9,11 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@WebServlet(name = "SesionServlet", urlPatterns = {"/session"})
 public class LoginServlet extends HttpServlet {
 
   private static final long serialVersionUID = 1L;

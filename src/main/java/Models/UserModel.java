@@ -11,29 +11,29 @@ public class UserModel {
     private String name,lastName,password,email,username,birthday,avatar;
     private int typeId, id;
     private boolean sex,enabled;
-    private Date creationTime;
+    private Timestamp creationTime;
         //para guardar la info de usuarios registrados
     public void setData(ResultSet rs) throws SQLException{
 	  this.setId(rs.getInt(1));
 		this.setUsername(rs.getString(2));
-		this.setName(rs.getString(5));
-		this.setLastName(rs.getString(6));
-		this.setEmail(rs.getString(7));
-		this.setBirthday(rs.getString(8));
-		this.setCreationTime(rs.getDate(9));
-		this.setAvatar(rs.getString(10));
-		this.setTypeId(rs.getInt(11));
-		this.setSex(rs.getBoolean(12));
-		this.setEnabled(rs.getBoolean(13));
+		this.setName(rs.getString(4));
+		this.setLastName(rs.getString(5));
+		this.setEmail(rs.getString(6));
+		this.setBirthday(rs.getString(7));
+		this.setCreationTime(rs.getTimestamp(8));
+		this.setAvatar(rs.getString(9));
+		this.setTypeId(rs.getInt(10));
+		this.setSex(rs.getBoolean(11));
+		this.setEnabled(rs.getBoolean(12));
 		this.setPassword(null);
     }
 
 
-  public Date getCreationTime() {
+  public Timestamp getCreationTime() {
     return creationTime;
   }
 
-  public void setCreationTime(Date creationTime) {
+  public void setCreationTime(Timestamp creationTime) {
     this.creationTime = creationTime;
   }
 

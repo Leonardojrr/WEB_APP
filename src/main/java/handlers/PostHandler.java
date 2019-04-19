@@ -82,19 +82,17 @@ public class PostHandler {
         post.setUser(user);        
         ResponseModel msgToUser = new ResponseModel();
         String resp="";
-        try {
-          rs = db.execute(prpReader.getValue("addPost"), post.getUser().getId(), post.getTypePost(), post.getPostText());
-            msgToUser.setMessage("Added post successfully.");
+          try {
+          db.update(prpReader.getValue("addPost"), post.getUser().getId(), post.getTypePost(), post.getPostText());
             msgToUser.setStatus(200);
-            rs.next();
-            msgToUser.setData(rs.getInt(1));
-        }
-        catch (SQLException e) {
+            msgToUser.setMessage("Added post successfully.");
+            msgToUser.setData(1);
+          } catch (Exception e) {
             e.printStackTrace();
             msgToUser.setMessage("Error while posting.");
             msgToUser.setStatus(500);
             msgToUser.setData(-1);
-        }
+          }        
         db.closeCon();
         resp = jackson.plainObjToJson(msgToUser);
         return resp;
@@ -170,11 +168,15 @@ public class PostHandler {
         prpReader = PropReader.getInstance();
         db = new DBConnection();
         try {
+          System.out.println(post_id);          
           rs = db.execute(prpReader.getValue("getLikes"), post_id);
             while(rs.next()) {
                 UserModel user = new UserModel();
                 LikeModel like = new LikeModel();
                 like.setData(rs);
+                          System.out.println(rs.toString()+" 1");          
+                          System.out.println("putras");          
+
                 user.setId(like.getUserId());
                 user.setUsername(rs.getString(4));
                 user.setName(rs.getString(5));
@@ -193,10 +195,12 @@ public class PostHandler {
         prpReader = PropReader.getInstance();
         db = new DBConnection();
         try {
+          System.out.println(post_id);
             rs = db.execute(prpReader.getValue("getComments"), post_id);
             while(rs.next()) {
                 CommentModel comment = new CommentModel();
                 UserModel user = new UserModel();
+                comment.setData(rs);
                 user.setUsername(rs.getString(5));
                 user.setName(rs.getString(6));
                 user.setLastName(rs.getString(7));

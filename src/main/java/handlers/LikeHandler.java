@@ -36,8 +36,7 @@ public class LikeHandler {
     String resp = "";    
 		try {
       rs = db.execute(prpReader.getValue("insertLike"), like.getUserId(), like.getPostId(), like.getTypeLikeId());
-			rs.next();
-			like.setLikeId(rs.getInt(1));
+			like.setData(rs);
 			msgToUser.setStatus(200);
 			msgToUser.setMessage("Post Liked");
 			msgToUser.setData(like);

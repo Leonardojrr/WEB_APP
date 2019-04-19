@@ -11,7 +11,7 @@ function login() {
         headers: new Headers({'Content-Type': 'application/json'}), 
         body:JSON.stringify(data) 
 }
-fetch("./../session", params)
+fetch("./../login", params)
 .then(resp => resp.json())
 .then(data => {
     console.log(data);
