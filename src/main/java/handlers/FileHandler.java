@@ -31,7 +31,7 @@ public class FileHandler {
   public String fileUp(HttpServletRequest request) throws JsonProcessingException, IOException, ServletException {
     jackson = new SuperMapper();
     Collection<Part> files = request.getParts();
-    int typePost = Integer.parseInt(request.getParameter("typePost"));
+    int typePost = Integer.parseInt(request.getParameter("type"));
     String id = request.getParameter("id");
     String extension = typePost == 2 ? ".png" : typePost == 3 ? ".mkv" : ".flac";
     InputStream fileContent = null;
@@ -40,9 +40,10 @@ public class FileHandler {
     ResponseModel msgToUser = new ResponseModel();
     String resp = "";
     try {
-      String baseDir = System.getenv("SystemDrive") + "/web2p1/assets/users/" + request.getSession(false).getAttribute("username")
+      String baseDir = System.getenv("SystemDrive") + "/web2p1/assets/users/" + request.getSession(false).getAttribute("user")
               + "/" + id + "/";
       int i = 0;
+      System.out.println(baseDir);
       for (Part file : files) {
         i++;
         fileContent = file.getInputStream();
@@ -110,12 +111,13 @@ public class FileHandler {
     if (request.getParameter("type").equalsIgnoreCase("avatar")) {
       target += "/web2p1/assets/avatars/";
     } else if (request.getParameter("type").equalsIgnoreCase("post")) {
-      target += "/web2p1/assets/users/" + request.getSession(false).getAttribute("username") + "/" + request.getParameter("id") + "/";
+      target += "/web2p1/assets/users/" + request.getSession(false).getAttribute("user") + "/" + request.getParameter("id") + "/";
     }
     FileInputStream fileObj = null;
     OutputStream out = response.getOutputStream();
     try {
       fileObj = new FileInputStream(target + request.getParameter("file"));
+      System.out.println("1");
       response.setHeader("Content-Length", Long.toString(fileObj.getChannel().size()));
       int read = 0;
       byte[] bytes = new byte[1024];

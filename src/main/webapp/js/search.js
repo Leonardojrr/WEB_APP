@@ -21,7 +21,7 @@ if(user == null|| user == undefined){
 .then(data => {
     console.log(data.data);
   if (data.data.length>0){
-    data.data.forEach(element => {
+    data.data.map(element => {
 
     $("result").innerHTML +=`
     <div class="red" style="border: 1px solid #212121 ;border-radius: 10px;height:auto ;padding: 1%;margin-bottom: 2%;margin-top: 2% ">

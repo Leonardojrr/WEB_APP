@@ -45,7 +45,7 @@ function search(value){
           if (data.data.length>0){
               localStorage.setItem("userFriends",JSON.stringify(data.data));
               friends.innerHTML = data.data.length;
-            data.data.forEach(element => {
+            data.data.map(element => {
         
             $("listFriends").innerHTML +=`
             <div class="red" style="border: 1px solid #212121 ;border-radius: 10px;height:auto ;padding: 1%;margin-bottom: 2%;margin-top: 2% ">
@@ -63,7 +63,7 @@ function search(value){
             </div>
             <div style="display:flex">
             <a id="profile" href="./../views/user.html?op=3&user=${element.username}" class="btn grey darken-4" style="width: 50%;">Ver Perfil</a>
-            <a id="delete" onclick ="borrar()" href="./../views/friends.html?user1=${element.id}&user2=${dataUser.id}" class="btn grey darken-4" style="width: 50%;">Eliminar</a>
+            <a id="delete" onclick ="borrar(${element.id})" class="btn grey darken-4" style="width: 50%;">Eliminar</a>
             <div id="deleteId" hidden>${element.id}</div>
             </div>
         </div>`
@@ -105,7 +105,7 @@ function search(value){
             </div>
             <div style="display:flex">
             <a id="profile" href="./../views/friend?user1="+${element.id}+"&user2="+${dataUser.id}" class="btn grey darken-4" style="width: 50%;">Ver Perfil</a>
-            <a id="delete" onclick ="borrar()" href="./../views/friend?user1="+${element.id}+"&user2="+${dataUser.id}" class="btn grey darken-4" style="width: 50%;">Eliminar</a>
+            <a id="delete" onclick ="borrar(${element.id})" class="btn grey darken-4" style="width: 50%;">Eliminar</a>
             </div>
         </div>`
         });        
@@ -116,19 +116,20 @@ function search(value){
     }
 
 }
-function borrar(){
-    let x = location.href.split('?')[1];
+function borrar(value){
+    let x = value;
     console.log(x)
     params={
         method: "DELETE", 
         headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}), 
 }
-    fetch("./../friend?"+x, params)
+    fetch("./../friend?user1="+x+"&user2="+dataUser.id, params)
 .then(resp => resp.json())
 .then(data => {
     console.log(data);
     if (data.status==200){
         alert(data.message+", status("+data.status+")");
+        location.reload();
         }else{
         alert(data.message+", status("+data.status+")");
     }

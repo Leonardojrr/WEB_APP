@@ -41,7 +41,7 @@ public class PostHandler {
         String resp="";
         Integer id = Integer.parseInt(request.getSession(false).getAttribute("user_id").toString());
         Integer postsCount = Integer.parseInt(request.getParameter("posts"));
-        String username = request.getSession(false).getAttribute("username").toString();
+        String username = request.getSession(false).getAttribute("user").toString();
         try {
           rs = db.execute(prpReader.getValue("getPosts"), id, id, postsCount);
             while (rs.next()) {
